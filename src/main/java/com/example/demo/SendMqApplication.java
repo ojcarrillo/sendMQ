@@ -7,6 +7,7 @@ import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
 import org.springframework.boot.SpringApplication;
@@ -36,7 +37,7 @@ public class SendMqApplication {
 			Channel channel = connection.createChannel();			
 			channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 			/* genera el mensaje */
-			String message = "THE JOKER WAR HERE! " + (new Date()).toString();
+			String message = generateRandom("BIR",1) + generateRandom("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",50) + "===>THE JOKER WAR HERE! " + (new Date()).toString();
 			/* publica el mensaje en la cola */
 			channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));			
 			System.out.println(" [x] Sent '" + message + "'");
@@ -50,6 +51,16 @@ public class SendMqApplication {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private static String generateRandom(String aToZ, Integer size) {
+	    Random rand=new Random();
+	    StringBuilder res=new StringBuilder();
+	    for (int i = 0; i < size; i++) {
+	       int randIndex=rand.nextInt(aToZ.length()); 
+	       res.append(aToZ.charAt(randIndex));            
+	    }
+	    return res.toString();
 	}
 }
 
