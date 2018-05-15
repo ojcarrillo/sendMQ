@@ -7,11 +7,11 @@ public class Gendata {
 	}
 
 	public static String getDataBill() {
-		return Utils.getNumeroFactura("B") + Utils.getDatosFactura(1, 15);
+		return Utils.getNumeroFactura("B") + Utils.getDatosFactura(1, 15).replaceAll(",", ".");
 	}
 
 	public static String getDataReceipt() {
-		return Utils.getNumeroFactura("R") + Utils.getDatosFactura(1, 30);
+		return Utils.getNumeroFactura("R") + Utils.getDatosFacturaReceipt(1, 30).replaceAll(",", ".");
 	}
 
 }

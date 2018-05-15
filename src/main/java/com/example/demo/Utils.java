@@ -31,8 +31,14 @@ public class Utils {
 					.split(","));
 
 	public static String getDatosFactura(int diaspasados, int diasfuturos) {
-		return getFechaFactura(new Date(), diaspasados) + getNumeroDocumentoCliente() + getTipoCliente() + getNombreCliente()
-				+ getValoresMonetarios() + getFechaFactura(new Date(), diasfuturos) + "A";// getEstadoFactura();
+		return getFechaFactura(new Date(), diaspasados) + getNumeroDocumentoCliente() + getTipoCliente()
+				+ getNombreCliente() + getValoresMonetarios() + getFechaFactura(new Date(), diasfuturos)
+				+ getEstadoFactura();
+	}
+
+	public static String getDatosFacturaReceipt(int diaspasados, int diasfuturos) {
+		return getFechaFactura(new Date(), diaspasados) + getNumeroDocumentoCliente() + getNombreCliente()
+				+ getTipoCliente() + getValoresMonetarios() + "A"; //getEstadoFactura();
 	}
 
 	public static String getNumeroFactura(String prefijo) {
@@ -78,8 +84,8 @@ public class Utils {
 		int porc = new Random().nextInt(10) + 1;
 		Double valorDescuento = Math.floor(valorFactura * porc / 100);
 		return StringUtils.leftPad(String.valueOf(porc) + ",00", 5, "0")
-				+ StringUtils.leftPad(String.valueOf(valorDescuento), 17, "0") 
-				+ StringUtils.leftPad(round((1-IVA)*100,2).toString(), 5, "0")
+				+ StringUtils.leftPad(String.valueOf(valorDescuento), 17, "0")
+				+ StringUtils.leftPad(round((1 - IVA) * 100, 2).toString(), 5, "0")
 				+ StringUtils.leftPad(String.valueOf(valorIva), 17, "0")
 				+ StringUtils.leftPad(String.valueOf(valorFactura), 17, "0");
 	}
@@ -93,11 +99,12 @@ public class Utils {
 	/* metodos generales */
 
 	public static String getNombres() {
-		return nombres.get(new Random().nextInt(40) + 1) + " " + nombres.get(new Random().nextInt(nombres.size()) );
+		return nombres.get(new Random().nextInt(40) + 1) + " " + nombres.get(new Random().nextInt(nombres.size()));
 	}
 
 	public static String getApellidos() {
-		return apellidos.get(new Random().nextInt(40) + 1) + " " + apellidos.get(new Random().nextInt(apellidos.size()) );
+		return apellidos.get(new Random().nextInt(40) + 1) + " "
+				+ apellidos.get(new Random().nextInt(apellidos.size()));
 	}
 
 	public static String generateRandomStr(String aToZ, Integer size) {
@@ -139,9 +146,9 @@ public class Utils {
 	public static Double getValorIVA(Double valorTotal) {
 		return round(valorTotal - (valorTotal * IVA), 2);
 	}
-	
-	public static Double round(Double val,Integer decimals) {
-	    return new BigDecimal(val.toString()).setScale(decimals,RoundingMode.HALF_UP).doubleValue();
+
+	public static Double round(Double val, Integer decimals) {
+		return new BigDecimal(val.toString()).setScale(decimals, RoundingMode.HALF_UP).doubleValue();
 	}
 
 }

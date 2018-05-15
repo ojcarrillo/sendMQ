@@ -37,7 +37,7 @@ public class SendMqApplication {
 			channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 			/* genera el mensaje */
 			String message = "";//Utils.getRandomInt(3)
-			switch (1) {
+			switch (3) {
 			case 1:
 				message = Gendata.getDataInvoice();
 				break;
